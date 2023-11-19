@@ -1,0 +1,19 @@
+<resources>
+    <string name="app_name">リスト選択サンプル</string>
+    <string-array name="lv_menu">
+        <item>唐揚げ定食1</item>
+        <item>唐揚げ定食2</item>
+        <item>唐揚げ定食3</item>
+        <item>唐揚げ定食4</item>
+        <item>唐揚げ定食5</item>
+        <item>唐揚げ定食6</item>
+        <item>唐揚げ定食7</item>
+        <item>唐揚げ定食8</item>
+        <item>唐揚げ定食9</item>
+        <item>唐揚げ定食10</item>
+        <item>唐揚げ定食11</item>
+        <item>唐揚げ定食12</item>
+        <item>唐揚げ定食13</item>
+        <item>唐揚げ定食14</item>
+    </string-array>
+</resources>
