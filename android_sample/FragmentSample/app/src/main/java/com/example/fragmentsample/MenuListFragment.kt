@@ -5,6 +5,7 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.AdapterView
 import android.widget.ListView
 import android.widget.SimpleAdapter
 
@@ -71,5 +72,35 @@ class MenuListFragment : Fragment(R.layout.fragment_menu_list) {
 
         val adapter = SimpleAdapter(activity, menuList, android.R.layout.simple_list_item_2, from, to)
         lvMenu.adapter = adapter
+
+        // リスナの登録
+        lvMenu.onItemClickListener = ListItemClickListener()
+    }
+
+    private inner class ListItemClickListener : AdapterView.OnItemClickListener {
+        override fun onItemClick(parent: AdapterView<*>?, view: View?, position: Int, id: Long) {
+            val item = parent?.getItemAtPosition(position) as MutableMap<String, String>
+            // 定食名と金額を取得
+            val menuName = item["name"]
+            val menuPrice = item["price"]
+
+            // 引継ぎデータをまとめて格納できるBundleオブジェクトを生成
+            val bundle = Bundle()
+            // Bundleオブジェクトに引き継ぎデータを格納
+            bundle.putString("menuName", menuName)
+            bundle.putString("menuPrice", menuPrice)
+
+            // フラグメントトランザクションの開始
+            val transaction = parentFragmentManager.beginTransaction()
+            // フラグメントトランザクションが正しく動作するように設定
+            transaction.setReorderingAllowed(true)
+            // 現在の表示内容をバックスタックに追加
+            transaction.addToBackStack("only List")
+            // fragmentMainContainerのフラグメントを注文完了フラグメントに置き換え
+            transaction.replace(R.id.fragmentMainContainer, MenuThanksFragment::class.java, bundle)
+            // フラグメントトランザクションのコミット
+            transaction.commit()
+        }
+
     }
 }
