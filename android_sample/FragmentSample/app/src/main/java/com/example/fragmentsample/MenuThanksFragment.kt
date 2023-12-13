@@ -39,6 +39,25 @@ class MenuThanksFragment : Fragment(R.layout.fragment_menu_thanks) {
 
     private inner class ButtonClickListener : View.OnClickListener {
         override fun onClick(view: View?) {
+            // 自分が所属するactivityがnullじゃないなら
+            activity?.let {
+                // 自分が所属するトランザクションからfragmentMainContainerを取得
+                val fragmentMainContainer = it.findViewById<View>(R.id.fragmentMainContainer)
+                // fragmentMainContainerが存在するなら
+                if (fragmentMainContainer != null) {
+                    parentFragmentManager.popBackStack()
+                } else {
+                    // fragmentMainContainerが存在しないなら
+                    // フラグメントトランザクションの開始
+                    val transaction = parentFragmentManager.beginTransaction()
+                    // フラグメントトランザクションが正しく動作するように設定
+                    transaction.setReorderingAllowed(true)
+                    // 自分自身を解除
+                    transaction.remove(this@MenuThanksFragment)
+                    // フラグメントトランザクションのコミット
+                    transaction.commit()
+                }
+            }
             parentFragmentManager.popBackStack()
         }
     }

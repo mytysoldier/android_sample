@@ -90,16 +90,26 @@ class MenuListFragment : Fragment(R.layout.fragment_menu_list) {
             bundle.putString("menuName", menuName)
             bundle.putString("menuPrice", menuPrice)
 
-            // フラグメントトランザクションの開始
-            val transaction = parentFragmentManager.beginTransaction()
-            // フラグメントトランザクションが正しく動作するように設定
-            transaction.setReorderingAllowed(true)
-            // 現在の表示内容をバックスタックに追加
-            transaction.addToBackStack("only List")
-            // fragmentMainContainerのフラグメントを注文完了フラグメントに置き換え
-            transaction.replace(R.id.fragmentMainContainer, MenuThanksFragment::class.java, bundle)
-            // フラグメントトランザクションのコミット
-            transaction.commit()
+            // 自分が所属するactivityがnullじゃないなら
+            activity?.let {
+                // フラグメントトランザクションの開始
+                val transaction = parentFragmentManager.beginTransaction()
+                // フラグメントトランザクションが正しく動作するように設定
+                transaction.setReorderingAllowed(true)
+                // 自分が所属するトランザクションからfragmentMainContainerを取得
+                val fragmentMainContainer = it.findViewById<View>(R.id.fragmentMainContainer)
+                // fragmentMainContainerが存在するなら
+                if (fragmentMainContainer != null) {
+                    // 現在の表示内容をバックスタックに追加
+                    transaction.addToBackStack("only List")
+                    // fragmentMainContainerのフラグメントを注文完了フラグメントに置き換え
+                    transaction.replace(R.id.fragmentMainContainer, MenuThanksFragment::class.java, bundle)
+                } else {
+                    transaction.replace(R.id.ffragmentThanksContainer, MenuThanksFragment::class.java, bundle)
+                }
+                // フラグメントトランザクションのコミット
+                transaction.commit()
+            }
         }
 
     }
