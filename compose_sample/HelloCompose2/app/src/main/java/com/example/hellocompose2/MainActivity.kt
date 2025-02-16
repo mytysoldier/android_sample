@@ -31,6 +31,14 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import com.example.hellocompose2.ui.entity.Animal
+import com.example.hellocompose2.ui.screen.AlertSample
+import com.example.hellocompose2.ui.screen.AnimalSelection
+import com.example.hellocompose2.ui.screen.AnimalSelection2
+import com.example.hellocompose2.ui.screen.CounterSample
+import com.example.hellocompose2.ui.screen.LambdaSample
+import com.example.hellocompose2.ui.screen.ScrollSample
+import com.example.hellocompose2.ui.screen.TextFieldSample
 import com.example.hellocompose2.ui.theme.HelloCompose2Theme
 
 class MainActivity : ComponentActivity() {
@@ -45,7 +53,18 @@ class MainActivity : ComponentActivity() {
                             modifier = Modifier.fillMaxSize(),
                             color = MaterialTheme.colorScheme.background
                         ) {
-                            Greeting("Compose")
+//                            Greeting("Compose")
+//                            CounterSample()
+//                            TextFieldSample()
+//                            ScrollSample()
+//                            val animals = listOf(
+//                                Animal(R.drawable.dog, "Dog"),
+//                                Animal(R.drawable.dog, "Cat"),
+//                                Animal(R.drawable.dog, "Bird")
+//                            )
+//                            AnimalSelection2(animals)
+//                            AlertSample()
+                            LambdaSample()
                         }
                     }
                 }
